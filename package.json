@@ -1,0 +1,25 @@
+{
+  "name": "react-tweet-embed",
+  "version": "1.0.0",
+  "description": "react component that you supply tweet id and you'll get a tweet embed back, nothing more",
+  "main": "tweet-embed.js",
+  "jspm": {
+    "format": "esm"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/capaj/react-tweet-embed.git"
+  },
+  "author": "capajj@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/capaj/react-tweet-embed/issues"
+  },
+  "homepage": "https://github.com/capaj/react-tweet-embed#readme",
+  "dependencies": {
+    "react": "^0.14.7"
+  }
+}
