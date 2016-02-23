@@ -1,10 +1,17 @@
 import React, {PropTypes} from 'react'
 
+var callbacks = [];
+
 function addScript (src, cb) {
-  var s = document.createElement('script')
-  s.setAttribute('src', src)
-  s.onload = cb
-  document.body.appendChild(s)
+  if (callbacks.length === 0) {
+    callbacks.push(cb)
+    var s = document.createElement('script')
+    s.setAttribute('src', src)
+    s.onload = () => callbacks.forEach((cb) => cb())
+    document.body.appendChild(s)
+  } else {
+    callbacks.push(cb)
+  }
 }
 
 class TweetEmbed extends React.Component {
