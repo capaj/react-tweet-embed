@@ -10,7 +10,7 @@ function addScript (src, cb) {
 class TweetEmbed extends React.Component {
   componentDidMount () {
     const renderTweet = () => {
-      window.twttr.widgets.createTweetEmbed(this.props.id, this.refs.div)
+      window.twttr.widgets.createTweetEmbed(this.props.id, this._div)
     }
     if (!window.twttr) {
       addScript('//platform.twitter.com/widgets.js', renderTweet)
@@ -19,7 +19,7 @@ class TweetEmbed extends React.Component {
     }
   }
   render () {
-    return <div ref='div'></div>
+    return <div ref={(c) => this._div = c} />
   }
 }
 
