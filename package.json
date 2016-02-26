@@ -1,6 +1,6 @@
 {
   "name": "react-tweet-embed",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "react component that you supply tweet id and you'll get a tweet embed back, nothing more",
   "main": "tweet-embed.js",
   "jspm": {
