@@ -16,8 +16,10 @@ function addScript (src, cb) {
 
 class TweetEmbed extends React.Component {
   componentDidMount () {
+    const options = this.props.options || {};
+
     const renderTweet = () => {
-      window.twttr.widgets.createTweetEmbed(this.props.id, this._div)
+      window.twttr.widgets.createTweetEmbed(this.props.id, this._div, options)
     }
     if (!window.twttr) {
       addScript('//platform.twitter.com/widgets.js', renderTweet)
@@ -31,7 +33,9 @@ class TweetEmbed extends React.Component {
 }
 
 TweetEmbed.propTypes = {
-  id: PropTypes.string
+  id: PropTypes.string,
+  options: PropTypes.object
+
 }
 
 export default TweetEmbed
