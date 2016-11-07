@@ -7,7 +7,7 @@ npm i react-tweet-embed
 jspm i npm:react-tweet-embed
 ```
 
-## Usage
+## Quickstart
 
 ```javascript
 import TweetEmbed from 'react-tweet-embed'
@@ -16,3 +16,14 @@ import TweetEmbed from 'react-tweet-embed'
 ```
 
 You don't have to put `//platform.twitter.com/widgets.js` script in your index.html as this lib will put it there if `twttr` is not found on window.  
+
+
+## Using Options
+
+```
+<TweetEmbed id='783943172057694208' options={{cards: 'hidden' }}/>
+<TweetEmbed id='771763270273294336' options={{theme: 'dark' }}/>
+```
+
+Embedded-Tweet Options Reference:
+https://dev.twitter.com/web/embedded-tweets/parameters
