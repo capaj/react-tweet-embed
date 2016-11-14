@@ -28,14 +28,13 @@ class TweetEmbed extends React.Component {
     }
   }
   render () {
-    return <div ref={(c) => this._div = c} />
+    return React.createElement('div', { ref: (c) => this._div = c })
   }
 }
 
 TweetEmbed.propTypes = {
   id: PropTypes.string,
   options: PropTypes.object
-
 }
 
 export default TweetEmbed
