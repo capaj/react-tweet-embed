@@ -1,13 +1,14 @@
 {
   "name": "react-tweet-embed",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "react component that you supply tweet id and you'll get a tweet embed back, nothing more",
-  "main": "tweet-embed.js",
-  "jspm": {
-    "format": "esm"
-  },
+  "main": "dist/tweet-embed.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "BABEL_ENV=test ava",
+    "pretest": "standard",
+    "build": "babel tweet-embed.js --out-dir dist",
+    "clean": "rimraf dist",
+    "prepublish": "npm test && npm run clean && npm run build"
   },
   "repository": {
     "type": "git",
@@ -21,5 +22,27 @@
   "homepage": "https://github.com/capaj/react-tweet-embed#readme",
   "dependencies": {
     "react": "^15.3.2"
+  },
+  "devDependencies": {
+    "ava": "^0.16.0",
+    "babel": "^6.5.2",
+    "babel-cli": "^6.18.0",
+    "babel-preset-react-app": "^1.0.0",
+    "react-snappy": "^0.2.3",
+    "standard": "^8.5.0"
+  },
+  "ava": {
+    "files": [
+      "*.spec.js"
+    ],
+    "babel": "inherit",
+    "require": [
+      "babel-register"
+    ]
+  },
+  "standard": {
+    "ignore": [
+      "dist/"
+    ]
   }
 }

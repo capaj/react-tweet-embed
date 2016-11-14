@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react'
 
-var callbacks = [];
+const callbacks = []
 
 function addScript (src, cb) {
   if (callbacks.length === 0) {
@@ -16,7 +16,7 @@ function addScript (src, cb) {
 
 class TweetEmbed extends React.Component {
   componentDidMount () {
-    const options = this.props.options || {};
+    const options = this.props.options || {}
 
     const renderTweet = () => {
       window.twttr.widgets.createTweetEmbed(this.props.id, this._div, options)
@@ -28,7 +28,9 @@ class TweetEmbed extends React.Component {
     }
   }
   render () {
-    return React.createElement('div', { ref: (c) => this._div = c })
+    return <div ref={(c) => {
+      this._div = c
+    }} />
   }
 }
 
