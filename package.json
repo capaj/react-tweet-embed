@@ -20,7 +20,7 @@
     "url": "https://github.com/capaj/react-tweet-embed/issues"
   },
   "homepage": "https://github.com/capaj/react-tweet-embed#readme",
-  "dependencies": {
+  "peerDependencies": {
     "react": "^15.3.2"
   },
   "devDependencies": {
