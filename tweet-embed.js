@@ -15,28 +15,50 @@ function addScript (src, cb) {
 }
 
 class TweetEmbed extends React.Component {
+
+  constructor(props) {
+    super(props)
+
+    if (this.props.preview) {
+      this.state = {
+        showPreview: true
+      }
+    }
+  }
+
   componentDidMount () {
     const options = this.props.options || {}
 
     const renderTweet = () => {
       window.twttr.widgets.createTweetEmbed(this.props.id, this._div, options)
     }
-    if (!window.twttr) {
-      addScript('//platform.twitter.com/widgets.js', renderTweet)
-    } else {
+
+    if (window.twttr) {
       renderTweet()
+      this.setState({showPreview: false})
+
+    } else {
+      if (this.state.hasOwnProperty('showPreview')) {
+        callbacks.push(() => this.setState({showPreview: false}))
+      }
+
+      addScript('//platform.twitter.com/widgets.js', renderTweet)
     }
   }
+
   render () {
-    return <div ref={(c) => {
-      this._div = c
-    }} />
+    return (
+      <div ref={(c) => { this._div = c}}>
+        { this.state.showPreview && this.props.preview }
+      </div>
+    )
   }
 }
 
 TweetEmbed.propTypes = {
-  id: PropTypes.string,
-  options: PropTypes.object
+  id: PropTypes.string.isRequired,
+  options: PropTypes.object,
+  preview: PropTypes.element
 }
 
 export default TweetEmbed

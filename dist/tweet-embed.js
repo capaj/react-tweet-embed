@@ -39,10 +39,17 @@ function addScript(src, cb) {
 var TweetEmbed = function (_React$Component) {
   _inherits(TweetEmbed, _React$Component);
 
-  function TweetEmbed() {
+  function TweetEmbed(props) {
     _classCallCheck(this, TweetEmbed);
 
-    return _possibleConstructorReturn(this, (TweetEmbed.__proto__ || Object.getPrototypeOf(TweetEmbed)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (TweetEmbed.__proto__ || Object.getPrototypeOf(TweetEmbed)).call(this, props));
+
+    if (_this.props.preview) {
+      _this.state = {
+        showPreview: true
+      };
+    }
+    return _this;
   }
 
   _createClass(TweetEmbed, [{
@@ -55,10 +62,18 @@ var TweetEmbed = function (_React$Component) {
       var renderTweet = function renderTweet() {
         window.twttr.widgets.createTweetEmbed(_this2.props.id, _this2._div, options);
       };
-      if (!window.twttr) {
-        addScript('//platform.twitter.com/widgets.js', renderTweet);
-      } else {
+
+      if (window.twttr) {
         renderTweet();
+        this.setState({ showPreview: false });
+      } else {
+        if (this.state.hasOwnProperty('showPreview')) {
+          callbacks.push(function () {
+            return _this2.setState({ showPreview: false });
+          });
+        }
+
+        addScript('//platform.twitter.com/widgets.js', renderTweet);
       }
     }
   }, {
@@ -66,9 +81,13 @@ var TweetEmbed = function (_React$Component) {
     value: function render() {
       var _this3 = this;
 
-      return _react2.default.createElement('div', { ref: function ref(c) {
-          _this3._div = c;
-        } });
+      return _react2.default.createElement(
+        'div',
+        { ref: function ref(c) {
+            _this3._div = c;
+          } },
+        this.state.showPreview && this.props.preview
+      );
     }
   }]);
 
@@ -76,8 +95,9 @@ var TweetEmbed = function (_React$Component) {
 }(_react2.default.Component);
 
 TweetEmbed.propTypes = {
-  id: _react.PropTypes.string,
-  options: _react.PropTypes.object
+  id: _react.PropTypes.string.isRequired,
+  options: _react.PropTypes.object,
+  preview: _react.PropTypes.element
 };
 
 exports.default = TweetEmbed;
