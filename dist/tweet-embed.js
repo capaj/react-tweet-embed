@@ -62,17 +62,18 @@ var TweetEmbed = function (_React$Component) {
       var renderTweet = function renderTweet() {
         window.twttr.widgets.createTweetEmbed(_this2.props.id, _this2._div, options);
       };
-      if (!window.twttr) {
-        addScript('//platform.twitter.com/widgets.js', renderTweet);
 
+      if (window.twttr) {
+        renderTweet();
+        this.setState({ showPreview: false });
+      } else {
         if (this.state.hasOwnProperty('showPreview')) {
           callbacks.push(function () {
             return _this2.setState({ showPreview: false });
           });
         }
-      } else {
-        renderTweet();
-        this.setState({ showPreview: false });
+
+        addScript('//platform.twitter.com/widgets.js', renderTweet);
       }
     }
   }, {

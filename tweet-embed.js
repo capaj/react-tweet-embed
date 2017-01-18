@@ -32,16 +32,17 @@ class TweetEmbed extends React.Component {
     const renderTweet = () => {
       window.twttr.widgets.createTweetEmbed(this.props.id, this._div, options)
     }
-    if (!window.twttr) {
-      addScript('//platform.twitter.com/widgets.js', renderTweet)
 
+    if (window.twttr) {
+      renderTweet()
+      this.setState({showPreview: false})
+
+    } else {
       if (this.state.hasOwnProperty('showPreview')) {
         callbacks.push(() => this.setState({showPreview: false}))
       }
 
-    } else {
-      renderTweet()
-      this.setState({showPreview: false})
+      addScript('//platform.twitter.com/widgets.js', renderTweet)
     }
   }
 
