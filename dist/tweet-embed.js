@@ -55,8 +55,11 @@ var TweetEmbed = function (_React$Component) {
       var renderTweet = function renderTweet() {
         window.twttr.widgets.createTweetEmbed(_this2.props.id, _this2._div, options);
       };
+
       if (!window.twttr) {
-        addScript('//platform.twitter.com/widgets.js', renderTweet);
+        var protocol = window.location.protocol.indexOf('file') >= 0 ? this.props.defaultProtocol : '';
+
+        addScript(protocol + '//platform.twitter.com/widgets.js', renderTweet);
       } else {
         renderTweet();
       }
@@ -77,7 +80,12 @@ var TweetEmbed = function (_React$Component) {
 
 TweetEmbed.propTypes = {
   id: _react.PropTypes.string,
-  options: _react.PropTypes.object
+  options: _react.PropTypes.object,
+  defaultProtocol: _react.PropTypes.string
+};
+
+TweetEmbed.defaultProps = {
+  defaultProtocol: 'https:'
 };
 
 exports.default = TweetEmbed;
