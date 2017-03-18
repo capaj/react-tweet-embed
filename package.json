@@ -1,12 +1,14 @@
 {
   "name": "react-tweet-embed",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "react component that you supply tweet id and you'll get a tweet embed back, nothing more",
   "main": "dist/tweet-embed.js",
+  "module": "dist/tweet-embed.es.js",
   "scripts": {
-    "test": "BABEL_ENV=test ava",
+    "test": "BABEL_ENV=cjs ava",
     "pretest": "standard",
-    "build": "babel tweet-embed.js --out-dir dist",
+    "build": "BABEL_ENV=cjs babel tweet-embed.js --out-dir dist && BABEL_ENV=es babel tweet-embed.js --out-file dist/tweet-embed.es.js",
+    "build-es": "BABEL_ENV=es babel tweet-embed.js --out-dir dist",
     "clean": "rimraf dist",
     "prepublish": "npm test && npm run clean && npm run build"
   },
@@ -24,14 +26,15 @@
     "react": ">0.14.0"
   },
   "devDependencies": {
-    "ava": "^0.16.0",
-    "babel": "^6.5.2",
-    "babel-cli": "^6.18.0",
-    "babel-preset-react-app": "^1.0.0",
-    "react": "^15.4.1",
-    "react-snappy": "^0.2.6",
-    "rimraf": "^2.5.4",
-    "standard": "^8.5.0"
+    "ava": "^0.18.2",
+    "babel": "^6.23.0",
+    "babel-cli": "^6.24.0",
+    "babel-preset-react-app": "^2.2.0",
+    "enzyme": "^2.7.1",
+    "jsdom": "^9.12.0",
+    "react": "^15.4.2",
+    "rimraf": "^2.6.1",
+    "standard": "^9.0.2"
   },
   "ava": {
     "files": [
@@ -46,5 +49,9 @@
     "ignore": [
       "dist/"
     ]
+  },
+  "dependencies": {
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-react": "^6.23.0"
   }
 }

@@ -1,3 +1,11 @@
 {
-  "presets": ["es2015", "react"]
+  "env": {
+    "cjs": {
+      "presets": ["es2015", "react"]
+    },
+    "es": {
+      "presets": ["react"]
+    }
+  }
+
 }
