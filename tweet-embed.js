@@ -24,7 +24,7 @@ class TweetEmbed extends React.Component {
 
     if (!window.twttr) {
       const protocol = window.location.protocol.indexOf('file') >= 0
-        ? this.props.defaultProtocol
+        ? this.props.protocol
         : ''
 
       addScript(`${protocol}//platform.twitter.com/widgets.js`, renderTweet)
@@ -42,11 +42,11 @@ class TweetEmbed extends React.Component {
 TweetEmbed.propTypes = {
   id: PropTypes.string,
   options: PropTypes.object,
-  defaultProtocol: PropTypes.string
+  protocol: PropTypes.string
 }
 
 TweetEmbed.defaultProps = {
-  defaultProtocol: 'https:'
+  protocol: 'https:'
 }
 
 export default TweetEmbed
