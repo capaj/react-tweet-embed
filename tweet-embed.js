@@ -16,10 +16,14 @@ function addScript (src, cb) {
 
 class TweetEmbed extends React.Component {
   componentDidMount () {
-    const options = this.props.options || {}
-
     const renderTweet = () => {
-      window.twttr.widgets.createTweetEmbed(this.props.id, this._div, options)
+      window.twttr.ready().then(({ widgets }) => {
+        const { options, onTweetLoadSuccess, onTweetLoadError } = this.props
+        widgets
+          .createTweetEmbed(this.props.id, this._div, options)
+          .then(onTweetLoadSuccess)
+          .catch(onTweetLoadError)
+      })
     }
 
     if (!window.twttr) {
@@ -32,6 +36,7 @@ class TweetEmbed extends React.Component {
       renderTweet()
     }
   }
+
   render () {
     return <div ref={(c) => {
       this._div = c
@@ -42,11 +47,14 @@ class TweetEmbed extends React.Component {
 TweetEmbed.propTypes = {
   id: PropTypes.string,
   options: PropTypes.object,
-  protocol: PropTypes.string
+  protocol: PropTypes.string,
+  onTweetLoadSuccess: PropTypes.func,
+  onTweetLoadError: PropTypes.func
 }
 
 TweetEmbed.defaultProps = {
-  protocol: 'https:'
+  protocol: 'https:',
+  options: {}
 }
 
 export default TweetEmbed

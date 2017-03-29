@@ -13,10 +13,13 @@ test.cb('calls twttr api', t => {
         createTweetEmbed: (...args) => {
           t.snapshot(args)
           t.end()
+          return Promise.resolve()
         }
       }
     }
   }
+
+  global.window.twttr.ready = () => Promise.resolve(global.window.twttr)
 
   const comp = new TweetEmbed({id: 'tweet_id', options: {myOption: 1}})
   comp.componentDidMount()
