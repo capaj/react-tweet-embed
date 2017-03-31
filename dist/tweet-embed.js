@@ -50,14 +50,21 @@ var TweetEmbed = function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      var options = this.props.options || {};
-
       var renderTweet = function renderTweet() {
-        window.twttr.widgets.createTweetEmbed(_this2.props.id, _this2._div, options);
+        window.twttr.ready().then(function (_ref) {
+          var widgets = _ref.widgets;
+          var _props = _this2.props,
+              options = _props.options,
+              onTweetLoadSuccess = _props.onTweetLoadSuccess,
+              onTweetLoadError = _props.onTweetLoadError;
+
+          widgets.createTweetEmbed(_this2.props.id, _this2._div, options).then(onTweetLoadSuccess).catch(onTweetLoadError);
+        });
       };
 
       if (!window.twttr) {
-        var protocol = window.location.protocol.indexOf('file') >= 0 ? this.props.defaultProtocol : '';
+        var isLocal = window.location.protocol.indexOf('file') >= 0;
+        var protocol = isLocal ? this.props.protocol : '';
 
         addScript(protocol + '//platform.twitter.com/widgets.js', renderTweet);
       } else {
@@ -81,11 +88,14 @@ var TweetEmbed = function (_React$Component) {
 TweetEmbed.propTypes = {
   id: _react.PropTypes.string,
   options: _react.PropTypes.object,
-  defaultProtocol: _react.PropTypes.string
+  protocol: _react.PropTypes.string,
+  onTweetLoadSuccess: _react.PropTypes.func,
+  onTweetLoadError: _react.PropTypes.func
 };
 
 TweetEmbed.defaultProps = {
-  defaultProtocol: 'https:'
+  protocol: 'https:',
+  options: {}
 };
 
 exports.default = TweetEmbed;

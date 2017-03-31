@@ -16,20 +16,23 @@ function addScript(src, cb) {
 
 class TweetEmbed extends React.Component {
   componentDidMount() {
-    const options = this.props.options || {};
-
     const renderTweet = () => {
-      window.twttr.widgets.createTweetEmbed(this.props.id, this._div, options);
+      window.twttr.ready().then(({ widgets }) => {
+        const { options, onTweetLoadSuccess, onTweetLoadError } = this.props;
+        widgets.createTweetEmbed(this.props.id, this._div, options).then(onTweetLoadSuccess).catch(onTweetLoadError);
+      });
     };
 
     if (!window.twttr) {
-      const protocol = window.location.protocol.indexOf('file') >= 0 ? this.props.defaultProtocol : '';
+      const isLocal = window.location.protocol.indexOf('file') >= 0;
+      const protocol = isLocal ? this.props.protocol : '';
 
       addScript(`${protocol}//platform.twitter.com/widgets.js`, renderTweet);
     } else {
       renderTweet();
     }
   }
+
   render() {
     return React.createElement('div', { ref: c => {
         this._div = c;
@@ -40,11 +43,14 @@ class TweetEmbed extends React.Component {
 TweetEmbed.propTypes = {
   id: PropTypes.string,
   options: PropTypes.object,
-  defaultProtocol: PropTypes.string
+  protocol: PropTypes.string,
+  onTweetLoadSuccess: PropTypes.func,
+  onTweetLoadError: PropTypes.func
 };
 
 TweetEmbed.defaultProps = {
-  defaultProtocol: 'https:'
+  protocol: 'https:',
+  options: {}
 };
 
 export default TweetEmbed;

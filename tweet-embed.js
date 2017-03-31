@@ -27,9 +27,8 @@ class TweetEmbed extends React.Component {
     }
 
     if (!window.twttr) {
-      const protocol = window.location.protocol.indexOf('file') >= 0
-        ? this.props.protocol
-        : ''
+      const isLocal = window.location.protocol.indexOf('file') >= 0
+      const protocol = isLocal ? this.props.protocol : ''
 
       addScript(`${protocol}//platform.twitter.com/widgets.js`, renderTweet)
     } else {
