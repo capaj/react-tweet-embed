@@ -37,7 +37,7 @@ class TweetEmbed extends React.Component {
   }
 
   render () {
-    return <div ref={(c) => {
+    return <div className={this.props.className} ref={(c) => {
       this._div = c
     }} />
   }
@@ -53,7 +53,8 @@ TweetEmbed.propTypes = {
 
 TweetEmbed.defaultProps = {
   protocol: 'https:',
-  options: {}
+  options: {},
+  className: null
 }
 
 export default TweetEmbed
