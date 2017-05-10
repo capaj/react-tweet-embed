@@ -48,7 +48,8 @@ TweetEmbed.propTypes = {
   options: PropTypes.object,
   protocol: PropTypes.string,
   onTweetLoadSuccess: PropTypes.func,
-  onTweetLoadError: PropTypes.func
+  onTweetLoadError: PropTypes.func,
+  className: PropTypes.string
 }
 
 TweetEmbed.defaultProps = {
