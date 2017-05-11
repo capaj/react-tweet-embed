@@ -3,7 +3,7 @@ import TweetEmbed from './tweet-embed'
 import React from 'react'
 
 test('renders', t => {
-  t.snapshot(<TweetEmbed id='692527862369357824' />)
+  t.snapshot(<TweetEmbed id='692527862369357824' className='tweet' />)
 })
 
 test.cb('calls twttr api', t => {
