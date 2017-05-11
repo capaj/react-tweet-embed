@@ -76,7 +76,7 @@ var TweetEmbed = function (_React$Component) {
     value: function render() {
       var _this3 = this;
 
-      return _react2.default.createElement('div', { ref: function ref(c) {
+      return _react2.default.createElement('div', { className: this.props.className, ref: function ref(c) {
           _this3._div = c;
         } });
     }
@@ -90,12 +90,14 @@ TweetEmbed.propTypes = {
   options: _react.PropTypes.object,
   protocol: _react.PropTypes.string,
   onTweetLoadSuccess: _react.PropTypes.func,
-  onTweetLoadError: _react.PropTypes.func
+  onTweetLoadError: _react.PropTypes.func,
+  className: _react.PropTypes.string
 };
 
 TweetEmbed.defaultProps = {
   protocol: 'https:',
-  options: {}
+  options: {},
+  className: null
 };
 
 exports.default = TweetEmbed;
