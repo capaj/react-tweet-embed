@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -86,12 +90,12 @@ var TweetEmbed = function (_React$Component) {
 }(_react2.default.Component);
 
 TweetEmbed.propTypes = {
-  id: _react.PropTypes.string,
-  options: _react.PropTypes.object,
-  protocol: _react.PropTypes.string,
-  onTweetLoadSuccess: _react.PropTypes.func,
-  onTweetLoadError: _react.PropTypes.func,
-  className: _react.PropTypes.string
+  id: _propTypes2.default.string,
+  options: _propTypes2.default.object,
+  protocol: _propTypes2.default.string,
+  onTweetLoadSuccess: _propTypes2.default.func,
+  onTweetLoadError: _propTypes2.default.func,
+  className: _propTypes2.default.string
 };
 
 TweetEmbed.defaultProps = {
