@@ -1,6 +1,6 @@
 {
   "name": "react-tweet-embed",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "react component that you supply tweet id and you'll get a tweet embed back, nothing more",
   "main": "dist/tweet-embed.js",
   "module": "dist/tweet-embed.es.js",
@@ -27,7 +27,7 @@
     "react": ">0.14.0"
   },
   "devDependencies": {
-    "ava": "^0.21.0",
+    "ava": "^0.22.0",
     "babel": "^6.23.0",
     "babel-cli": "^6.24.1",
     "babel-preset-es2015": "^6.24.1",
@@ -40,6 +40,9 @@
     "rimraf": "^2.6.1",
     "standard": "^10.0.2"
   },
+  "files": [
+    "dist"
+  ],
   "ava": {
     "files": [
       "*.spec.js"
