@@ -3,8 +3,6 @@
 ## Install
 ```
 npm i react-tweet-embed
-#or
-jspm i npm:react-tweet-embed
 ```
 
 ## Quickstart
