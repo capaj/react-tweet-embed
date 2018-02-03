@@ -16,10 +16,15 @@ function addScript (src, cb) {
 }
 
 class TweetEmbed extends React.Component {
-  componentDidMount () {
+  loadTweetForProps (props) {
     const renderTweet = () => {
       window.twttr.ready().then(({ widgets }) => {
-        const { options, onTweetLoadSuccess, onTweetLoadError } = this.props
+        // Clear previously rendered tweet before rendering the updated tweet id
+        if (this._div) {
+          this._div.innerHTML = ''
+        }
+
+        const { options, onTweetLoadSuccess, onTweetLoadError } = props
         widgets
           .createTweetEmbed(this.props.id, this._div, options)
           .then(onTweetLoadSuccess)
@@ -35,6 +40,18 @@ class TweetEmbed extends React.Component {
     } else {
       renderTweet()
     }
+  }
+
+  componentDidMount () {
+    this.loadTweetForProps(this.props)
+  }
+
+  shouldComponentUpdate (nextProps, nextState) {
+    return this.props.id !== nextProps.id
+  }
+
+  componentWillUpdate (nextProps, nextState) {
+    this.loadTweetForProps(nextProps)
   }
 
   render () {
