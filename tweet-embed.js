@@ -8,7 +8,7 @@ function addScript (src, cb) {
     callbacks.push(cb)
     var s = document.createElement('script')
     s.setAttribute('src', src)
-    s.onload = () => callbacks.forEach((cb) => cb())
+    s.onload = () => callbacks.forEach(cb => cb())
     document.body.appendChild(s)
   } else {
     callbacks.push(cb)
@@ -32,7 +32,7 @@ class TweetEmbed extends React.Component {
       })
     }
 
-    if (!window.twttr) {
+    if (!(window.twttr && window.twttr.ready)) {
       const isLocal = window.location.protocol.indexOf('file') >= 0
       const protocol = isLocal ? this.props.protocol : ''
 
@@ -55,9 +55,14 @@ class TweetEmbed extends React.Component {
   }
 
   render () {
-    return <div className={this.props.className} ref={(c) => {
-      this._div = c
-    }} />
+    return (
+      <div
+        className={this.props.className}
+        ref={c => {
+          this._div = c
+        }}
+      />
+    )
   }
 }
 

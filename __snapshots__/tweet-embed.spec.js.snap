@@ -1,3 +1,0 @@
-exports[`calls twttr api 1`] = `"["tweet_id",null,{"myOption":1}]"`;
-
-exports[`renders 1`] = `"{\"key\":null,\"ref\":null,\"props\":{\"id\":\"692527862369357824\",\"className\":\"tweet\",\"protocol\":\"https:\",\"options\":{}},\"_owner\":null,\"_store\":{}}"`;
