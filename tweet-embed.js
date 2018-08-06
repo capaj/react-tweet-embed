@@ -46,13 +46,6 @@ class TweetEmbed extends React.Component {
     this.loadTweetForProps(this.props)
   }
 
-  shouldComponentUpdate (nextProps, nextState) {
-    return (
-      this.props.id !== nextProps.id ||
-      this.props.className !== nextProps.className
-    )
-  }
-
   componentWillUpdate (nextProps, nextState) {
     if (this.props.id !== nextProps.id) {
       this.loadTweetForProps(nextProps)
