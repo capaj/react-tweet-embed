@@ -8,12 +8,13 @@
   "scripts": {
     "test": "BABEL_ENV=cjs ava",
     "testu": "BABEL_ENV=cjs ava -u",
+    "test:e2e": "BABEL_ENV=cjs ava *.e2e.js",
     "pretest": "standard",
     "build":
       "BABEL_ENV=cjs babel tweet-embed.js --out-dir dist && BABEL_ENV=es babel tweet-embed.js --out-file dist/tweet-embed.es.js",
     "build-es": "BABEL_ENV=es babel tweet-embed.js --out-dir dist",
     "clean": "rimraf dist",
-    "prepublish": "npm test && npm run clean && npm run build"
+    "prepublishOnly": "npm test && npm run clean && npm run build"
   },
   "repository": {
     "type": "git",
@@ -38,6 +39,7 @@
     "enzyme": "^3.3.0",
     "jsdom": "^11.6.2",
     "prop-types": "^15.6.0",
+    "puppeteer": "^1.8.0",
     "react": "^16.2.0",
     "rimraf": "^2.6.2",
     "standard": "^10.0.3"
