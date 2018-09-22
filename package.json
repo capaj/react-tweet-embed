@@ -10,6 +10,7 @@
     "testu": "BABEL_ENV=cjs ava -u",
     "test:e2e": "BABEL_ENV=cjs ava *.e2e.js",
     "pretest": "standard",
+    "pretest:e2e": "standard && npm run build",
     "build":
       "BABEL_ENV=cjs babel tweet-embed.js --out-dir dist && BABEL_ENV=es babel tweet-embed.js --out-file dist/tweet-embed.es.js",
     "build-es": "BABEL_ENV=es babel tweet-embed.js --out-dir dist",
@@ -40,6 +41,7 @@
     "jsdom": "^11.6.2",
     "prop-types": "^15.6.0",
     "puppeteer": "^1.8.0",
+    "puppeteer-screenshot-tester": "^1.0.4",
     "react": "^16.2.0",
     "rimraf": "^2.6.2",
     "standard": "^10.0.3"
