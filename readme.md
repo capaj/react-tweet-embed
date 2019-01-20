@@ -23,5 +23,5 @@ You don't have to put `//platform.twitter.com/widgets.js` script in your index.h
 <TweetEmbed id='771763270273294336' options={{theme: 'dark' }}/>
 ```
 
-Embedded-Tweet Options Reference:
-https://dev.twitter.com/web/embedded-tweets/parameters
+Embedded-Tweet Options Reference:  
+https://developer.twitter.com/en/docs/twitter-for-websites/embedded-tweets/guides/embedded-tweet-parameter-reference
