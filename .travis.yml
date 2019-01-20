@@ -1,4 +1,17 @@
 language: node_js
 node_js:
-  - v7
+  - v8
   - v6
+
+jobs:
+  include:
+    - stage: test
+      script:
+        - npm test
+    - stage: e2e
+      install:
+        - cd e2e-app && npm i && cd ..
+      before_script:
+        - npm start --prefix e2e-app &
+      script:
+        - npm run test:e2e
