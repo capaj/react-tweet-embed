@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 const callbacks = []
 
-function addScript(src, cb) {
+function addScript(src: string, cb: () => any) {
   if (callbacks.length === 0) {
     callbacks.push(cb)
     var s = document.createElement('script')
@@ -15,7 +15,7 @@ function addScript(src, cb) {
   }
 }
 
-class TweetEmbed extends React.Component<{
+interface ITweetEmbedProps {
   id: string
   options?: object
   placeholder?: string | React.ReactNode
@@ -23,7 +23,13 @@ class TweetEmbed extends React.Component<{
   onTweetLoadSuccess?: (twitterWidgetElement: HTMLElement) => any
   onTweetLoadError?: (err: Error) => any
   className?: string
-}> {
+}
+
+interface ITweetEmbedState {
+  isLoading: boolean
+}
+
+class TweetEmbed extends React.Component<ITweetEmbedProps> {
   _div?: HTMLDivElement
   static propTypes = {
     id: PropTypes.string,
@@ -40,10 +46,10 @@ class TweetEmbed extends React.Component<{
     className: null
   }
 
-  state = {
+  state: ITweetEmbedState = {
     isLoading: true
   }
-  loadTweetForProps(props) {
+  loadTweetForProps(props: ITweetEmbedProps) {
     const twttr = window['twttr']
 
     const renderTweet = () => {
@@ -80,7 +86,10 @@ class TweetEmbed extends React.Component<{
     this.loadTweetForProps(this.props)
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(
+    nextProps: ITweetEmbedProps,
+    nextState: ITweetEmbedState
+  ) {
     return (
       this.props.id !== nextProps.id ||
       this.props.className !== nextProps.className
