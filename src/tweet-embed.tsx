@@ -1,4 +1,4 @@
-import React, { Ref } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 const callbacks = []
@@ -18,9 +18,10 @@ function addScript(src, cb) {
 class TweetEmbed extends React.Component<{
   id: string
   options?: object
+  placeholder?: string | React.ReactNode
   protocol?: string
-  onTweetLoadSuccess?: () => any
-  onTweetLoadError?: () => any
+  onTweetLoadSuccess?: (twitterWidgetElement: HTMLElement) => any
+  onTweetLoadError?: (err: Error) => any
   className?: string
 }> {
   _div?: HTMLDivElement
@@ -38,6 +39,10 @@ class TweetEmbed extends React.Component<{
     options: {},
     className: null
   }
+
+  state = {
+    isLoading: true
+  }
   loadTweetForProps(props) {
     const twttr = window['twttr']
 
@@ -51,7 +56,12 @@ class TweetEmbed extends React.Component<{
         const { options, onTweetLoadSuccess, onTweetLoadError } = props
         widgets
           .createTweetEmbed(this.props.id, this._div, options)
-          .then(onTweetLoadSuccess)
+          .then((twitterWidgetElement) => {
+            this.setState({
+              isLoading: false
+            })
+            onTweetLoadSuccess(twitterWidgetElement)
+          })
           .catch(onTweetLoadError)
       })
     }
@@ -84,13 +94,17 @@ class TweetEmbed extends React.Component<{
   }
 
   render() {
+    const { props, state } = this
+
     return (
       <div
         className={this.props.className}
         ref={(c) => {
           this._div = c
         }}
-      />
+      >
+        {state.isLoading && props.placeholder}
+      </div>
     )
   }
 }

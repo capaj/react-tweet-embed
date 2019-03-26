@@ -1,6 +1,6 @@
 {
   "name": "react-tweet-embed",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "react component that takes tweet id in props and renders tweet embed, nothing more",
   "main": "dist/tweet-embed.js",
   "module": "dist/tweet-embed.es.js",
