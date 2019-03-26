@@ -50,9 +50,8 @@ class TweetEmbed extends React.Component<ITweetEmbedProps> {
     isLoading: true
   }
   loadTweetForProps(props: ITweetEmbedProps) {
-    const twttr = window['twttr']
-
     const renderTweet = () => {
+      const twttr = window['twttr']
       twttr.ready().then(({ widgets }) => {
         // Clear previously rendered tweet before rendering the updated tweet id
         if (this._div) {
@@ -72,6 +71,7 @@ class TweetEmbed extends React.Component<ITweetEmbedProps> {
       })
     }
 
+    const twttr = window['twttr']
     if (!(twttr && twttr.ready)) {
       const isLocal = window.location.protocol.indexOf('file') >= 0
       const protocol = isLocal ? this.props.protocol : ''
