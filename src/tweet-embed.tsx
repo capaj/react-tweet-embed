@@ -1,24 +1,48 @@
-import React from 'react'
+import React, { Ref } from 'react'
 import PropTypes from 'prop-types'
 
 const callbacks = []
 
-function addScript (src, cb) {
+function addScript(src, cb) {
   if (callbacks.length === 0) {
     callbacks.push(cb)
     var s = document.createElement('script')
     s.setAttribute('src', src)
-    s.onload = () => callbacks.forEach(cb => cb())
+    s.onload = () => callbacks.forEach((cb) => cb())
     document.body.appendChild(s)
   } else {
     callbacks.push(cb)
   }
 }
 
-class TweetEmbed extends React.Component {
-  loadTweetForProps (props) {
+class TweetEmbed extends React.Component<{
+  id: string
+  options?: object
+  protocol?: string
+  onTweetLoadSuccess?: () => any
+  onTweetLoadError?: () => any
+  className?: string
+}> {
+  _div?: HTMLDivElement
+  static propTypes = {
+    id: PropTypes.string,
+    options: PropTypes.object,
+    protocol: PropTypes.string,
+    onTweetLoadSuccess: PropTypes.func,
+    onTweetLoadError: PropTypes.func,
+    className: PropTypes.string
+  }
+
+  static defaultProps = {
+    protocol: 'https:',
+    options: {},
+    className: null
+  }
+  loadTweetForProps(props) {
+    const twttr = window['twttr']
+
     const renderTweet = () => {
-      window.twttr.ready().then(({ widgets }) => {
+      twttr.ready().then(({ widgets }) => {
         // Clear previously rendered tweet before rendering the updated tweet id
         if (this._div) {
           this._div.innerHTML = ''
@@ -32,7 +56,7 @@ class TweetEmbed extends React.Component {
       })
     }
 
-    if (!(window.twttr && window.twttr.ready)) {
+    if (!(twttr && twttr.ready)) {
       const isLocal = window.location.protocol.indexOf('file') >= 0
       const protocol = isLocal ? this.props.protocol : ''
 
@@ -42,48 +66,33 @@ class TweetEmbed extends React.Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.loadTweetForProps(this.props)
   }
 
-  shouldComponentUpdate (nextProps, nextState) {
+  shouldComponentUpdate(nextProps, nextState) {
     return (
       this.props.id !== nextProps.id ||
       this.props.className !== nextProps.className
     )
   }
 
-  componentWillUpdate (nextProps, nextState) {
+  componentWillUpdate(nextProps, nextState) {
     if (this.props.id !== nextProps.id) {
       this.loadTweetForProps(nextProps)
     }
   }
 
-  render () {
+  render() {
     return (
       <div
         className={this.props.className}
-        ref={c => {
+        ref={(c) => {
           this._div = c
         }}
       />
     )
   }
-}
-
-TweetEmbed.propTypes = {
-  id: PropTypes.string,
-  options: PropTypes.object,
-  protocol: PropTypes.string,
-  onTweetLoadSuccess: PropTypes.func,
-  onTweetLoadError: PropTypes.func,
-  className: PropTypes.string
-}
-
-TweetEmbed.defaultProps = {
-  protocol: 'https:',
-  options: {},
-  className: null
 }
 
 export default TweetEmbed

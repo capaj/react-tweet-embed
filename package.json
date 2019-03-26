@@ -1,17 +1,17 @@
 {
   "name": "react-tweet-embed",
-  "version": "1.1.1",
-  "description": "react component that you supply tweet id and you'll get a tweet embed back, nothing more",
+  "version": "1.2.0",
+  "description": "react component that takes tweet id in props and renders tweet embed, nothing more",
   "main": "dist/tweet-embed.js",
   "module": "dist/tweet-embed.es.js",
+  "unpkg": "dist/tweet-embed.umd.js",
+  "source": "src/tweet-embed.tsx",
   "scripts": {
-    "test": "BABEL_ENV=cjs ava",
-    "testu": "BABEL_ENV=cjs ava -u",
-    "pretest": "standard",
-    "build": "BABEL_ENV=cjs babel tweet-embed.js --out-dir dist && BABEL_ENV=es babel tweet-embed.js --out-file dist/tweet-embed.es.js",
-    "build-es": "BABEL_ENV=es babel tweet-embed.js --out-dir dist",
-    "clean": "rimraf dist",
-    "prepublish": "npm test && npm run clean && npm run build"
+    "test": "ava",
+    "testu": "ava -u",
+    "build": "microbundle",
+    "dev": "microbundle watch",
+    "prepublish": "npm test && npm run build"
   },
   "repository": {
     "type": "git",
@@ -27,34 +27,39 @@
     "react": ">0.14.0"
   },
   "devDependencies": {
-    "ava": "^0.25.0",
-    "babel": "^6.23.0",
-    "babel-cli": "^6.26.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-react-app": "^3.1.1",
-    "enzyme": "^3.3.0",
-    "jsdom": "^11.6.2",
-    "prop-types": "^15.6.0",
-    "react": "^16.2.0",
-    "rimraf": "^2.6.2",
-    "standard": "^10.0.3"
+    "@types/prop-types": "^15.7.0",
+    "@types/react": "^16.8.8",
+    "ava": "^1.4.0",
+    "enzyme": "^3.9.0",
+    "husky": "^1.3.1",
+    "jsdom": "^14.0.0",
+    "microbundle": "^0.11.0",
+    "prettier": "^1.16.4",
+    "pretty-quick": "^1.10.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.5",
+    "rimraf": "^2.6.3",
+    "ts-node": "^8.0.3",
+    "typescript": "^3.3.4000"
   },
   "files": [
     "dist"
   ],
   "ava": {
+    "compileEnhancements": false,
     "files": [
-      "*.spec.js"
+      "**/*.spec.tsx"
     ],
-    "babel": "inherit",
+    "extensions": [
+      "tsx"
+    ],
     "require": [
-      "babel-register"
+      "ts-node/register"
     ]
   },
-  "standard": {
-    "ignore": [
-      "dist/"
-    ]
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   }
 }

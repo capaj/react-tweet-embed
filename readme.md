@@ -1,20 +1,19 @@
 # react-tweet-embed
 
 ## Install
+
 ```
 npm i react-tweet-embed
 ```
 
-## Quickstart
+## Quickstart [![Edit react-tweet-embed](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/74rn3r9k0?fontsize=14)
 
 ```javascript
 import TweetEmbed from 'react-tweet-embed'
-
-<TweetEmbed id='692527862369357824' />
+;<TweetEmbed id="692527862369357824" />
 ```
 
-You don't have to put `//platform.twitter.com/widgets.js` script in your index.html as this lib will put it there if `twttr` is not found on window.  
-
+You don't have to put `//platform.twitter.com/widgets.js` script in your index.html as this lib will put it there if `twttr` is not found on window.
 
 ## Using Options
 
