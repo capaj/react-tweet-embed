@@ -60,7 +60,7 @@ class TweetEmbed extends React.Component<{
             this.setState({
               isLoading: false
             })
-            onTweetLoadSuccess(twitterWidgetElement)
+            onTweetLoadSuccess && onTweetLoadSuccess(twitterWidgetElement)
           })
           .catch(onTweetLoadError)
       })
