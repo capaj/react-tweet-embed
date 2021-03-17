@@ -8,6 +8,7 @@ test('renders', (t) => {
 
 test.cb('calls twttr api', (t) => {
   global['window'] = {
+    // @ts-expect-error
     twttr: {
       widgets: {
         createTweetEmbed: (...args) => {
@@ -18,7 +19,7 @@ test.cb('calls twttr api', (t) => {
       }
     }
   }
-
+  // @ts-expect-error
   global['window'].twttr.ready = () => Promise.resolve(global['window'].twttr)
 
   const comp = new TweetEmbed({ id: 'tweet_id', options: { myOption: 1 } })
