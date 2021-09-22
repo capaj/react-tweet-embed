@@ -3,13 +3,14 @@
   "version": "1.3.0",
   "description": "react component that takes tweet id in props and renders tweet embed, nothing more",
   "main": "dist/tweet-embed.js",
+  "types": "dist/tweet-embed.d.ts",
   "module": "dist/tweet-embed.es.js",
   "unpkg": "dist/tweet-embed.umd.js",
   "source": "src/tweet-embed.tsx",
   "scripts": {
     "test": "ava",
     "testu": "ava -u",
-    "build": "microbundle",
+    "build": "microbundle --jsx React.createElement",
     "dev": "microbundle watch",
     "prepublish": "npm test && npm run build"
   },
@@ -24,23 +25,23 @@
   },
   "homepage": "https://github.com/capaj/react-tweet-embed#readme",
   "peerDependencies": {
-    "react": ">15"
+    "react": ">17"
   },
   "devDependencies": {
-    "@types/prop-types": "^15.7.3",
-    "@types/react": "^17.0.3",
+    "@types/prop-types": "^15.7.4",
+    "@types/react": "^17.0.24",
     "ava": "^3.15.0",
     "enzyme": "^3.11.0",
-    "husky": "^5.1.3",
-    "jsdom": "^16.5.1",
-    "microbundle": "^0.13.0",
-    "prettier": "^2.2.1",
-    "pretty-quick": "^3.1.0",
+    "husky": "^7.0.2",
+    "jsdom": "^17.0.0",
+    "microbundle": "^0.13.3",
+    "prettier": "^2.4.1",
+    "pretty-quick": "^3.1.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.5",
     "rimraf": "^3.0.2",
-    "ts-node": "^9.1.1",
-    "typescript": "^4.2.3"
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.3"
   },
   "files": [
     "dist"
