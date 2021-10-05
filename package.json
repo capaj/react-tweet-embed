@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/capaj/react-tweet-embed#readme",
   "peerDependencies": {
-    "react": ">=17"
+    "react": ">=15"
   },
   "devDependencies": {
     "@types/prop-types": "^15.7.4",
