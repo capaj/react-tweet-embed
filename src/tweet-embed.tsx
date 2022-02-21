@@ -16,7 +16,7 @@ function addScript(src: string, cb: () => any) {
 }
 
 interface ITweetEmbedProps {
-  id: string
+  tweetId: string
   options?: object
   placeholder?: string | React.ReactNode
   protocol?: string
@@ -32,8 +32,9 @@ interface ITweetEmbedState {
 class TweetEmbed extends React.Component<ITweetEmbedProps> {
   _div?: HTMLDivElement
   static propTypes = {
-    id: PropTypes.string,
+    tweetId: PropTypes.string,
     options: PropTypes.object,
+    placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
     protocol: PropTypes.string,
     onTweetLoadSuccess: PropTypes.func,
     onTweetLoadError: PropTypes.func,
@@ -60,7 +61,7 @@ class TweetEmbed extends React.Component<ITweetEmbedProps> {
 
         const { options, onTweetLoadSuccess, onTweetLoadError } = props
         widgets
-          .createTweetEmbed(this.props.id, this._div, options)
+          .createTweetEmbed(this.props.tweetId, this._div, options)
           .then((twitterWidgetElement) => {
             this.setState({
               isLoading: false
@@ -91,23 +92,32 @@ class TweetEmbed extends React.Component<ITweetEmbedProps> {
     nextState: ITweetEmbedState
   ) {
     return (
-      this.props.id !== nextProps.id ||
+      this.props.tweetId !== nextProps.tweetId ||
       this.props.className !== nextProps.className
     )
   }
 
   componentWillUpdate(nextProps, nextState) {
-    if (this.props.id !== nextProps.id) {
+    if (this.props.tweetId !== nextProps.tweetId) {
       this.loadTweetForProps(nextProps)
     }
   }
 
   render() {
     const { props, state } = this
-
+    const {
+      tweetId,
+      onTweetLoadError,
+      onTweetLoadSuccess,
+      options,
+      children,
+      placeholder,
+      protocol,
+      ...restProps
+    } = props
     return (
       <div
-        className={this.props.className}
+        {...restProps}
         ref={(c) => {
           this._div = c
         }}
