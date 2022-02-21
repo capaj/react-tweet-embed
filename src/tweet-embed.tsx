@@ -34,6 +34,7 @@ class TweetEmbed extends React.Component<ITweetEmbedProps> {
   static propTypes = {
     tweetId: PropTypes.string,
     options: PropTypes.object,
+    placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
     protocol: PropTypes.string,
     onTweetLoadSuccess: PropTypes.func,
     onTweetLoadError: PropTypes.func,
