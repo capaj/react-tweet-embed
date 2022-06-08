@@ -8,9 +8,13 @@ npm i react-tweet-embed
 
 ## Quickstart [![Edit react-tweet-embed](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/74rn3r9k0?fontsize=14)
 
-```javascript
+```tsx
+import React from 'react'
 import TweetEmbed from 'react-tweet-embed'
-;<TweetEmbed id="692527862369357824" />
+
+export const App = () => {
+  return <TweetEmbed tweetId="692527862369357824" />
+}
 ```
 
 You don't have to put `//platform.twitter.com/widgets.js` script in your index.html as this lib will put it there if `twttr` is not found on `window`.
@@ -31,4 +35,5 @@ Key-value pairs from the [embedded tweet parameter reference](https://developer.
 ```html
 <TweetEmbed id='783943172057694208' options={{cards: 'hidden' }}/>
 <TweetEmbed id='771763270273294336' options={{theme: 'dark' }}/>
+
 ```
