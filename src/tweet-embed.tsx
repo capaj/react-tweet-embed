@@ -8,7 +8,7 @@ function addScript(src: string, cb: () => any) {
     callbacks.push(cb)
     var s = document.createElement('script')
     s.setAttribute('src', src)
-    s.onload = () => callbacks.forEach((cb) => cb())
+    s.addEventListener('load', () => callbacks.forEach((cb) => cb()), false)
     document.body.appendChild(s)
   } else {
     callbacks.push(cb)
