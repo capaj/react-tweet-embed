@@ -17,14 +17,23 @@ export const App = () => {
 }
 ```
 
-You don't have to put `//platform.twitter.com/widgets.js` script in your index.html as this lib will put it there if `twttr` is not found on window.
+You don't have to put `//platform.twitter.com/widgets.js` script in your index.html as this lib will put it there if `twttr` is not found on `window`.
 
-## Using Options
+## Props
 
-```tsx
-<TweetEmbed tweetId='783943172057694208' options={{cards: 'hidden' }}/>
-<TweetEmbed tweetId='771763270273294336' options={{theme: 'dark' }}/>
+### `placeholder`
+
+Text to be shown while the tweet is loading:
+```html
+<TweetEmbed id='1186523464712146944' placeholder='Sending this tweet through space via Starlink satellite 🛰'/>
 ```
 
-Embedded-Tweet Options Reference:  
-https://developer.twitter.com/en/docs/twitter-for-websites/embedded-tweets/guides/embedded-tweet-parameter-reference
+### `options`
+
+Key-value pairs from the [embedded tweet parameter reference](https://developer.twitter.com/en/docs/twitter-for-websites/embedded-tweets/guides/embedded-tweet-parameter-reference):
+
+```html
+<TweetEmbed id='783943172057694208' options={{cards: 'hidden' }}/>
+<TweetEmbed id='771763270273294336' options={{theme: 'dark' }}/>
+
+```
